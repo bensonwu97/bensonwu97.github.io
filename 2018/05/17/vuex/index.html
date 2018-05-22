@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="vue," />
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="一个切图仔">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Benson">
-<meta property="og:url" content="http://bensonwu.com/index.html">
+<meta name="description" content="Vuex这个结构类似Flux和Redux，因为是阉割版，取精华的版本。vue的官方插件叫做vuex实现了它。 全局状态，数据的单向流动！ Vue还有没有别的技术栈，有！但是vuex这个栈是最普遍的，最正统的。 Vue还有没有别的全局控制状态的方法，有！比如将app通过组件的props实参传输给每个子组件，不优雅。 官网：http://vuex.vuejs.org/zh-cn/intro.html">
+<meta name="keywords" content="vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vuex入门">
+<meta property="og:url" content="http://bensonwu.com/2018/05/17/vuex/index.html">
 <meta property="og:site_name" content="Benson">
-<meta property="og:description" content="一个切图仔">
+<meta property="og:description" content="Vuex这个结构类似Flux和Redux，因为是阉割版，取精华的版本。vue的官方插件叫做vuex实现了它。 全局状态，数据的单向流动！ Vue还有没有别的技术栈，有！但是vuex这个栈是最普遍的，最正统的。 Vue还有没有别的全局控制状态的方法，有！比如将app通过组件的props实参传输给每个子组件，不优雅。 官网：http://vuex.vuejs.org/zh-cn/intro.html">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-22T02:15:21.826Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Benson">
-<meta name="twitter:description" content="一个切图仔">
+<meta name="twitter:title" content="Vuex入门">
+<meta name="twitter:description" content="Vuex这个结构类似Flux和Redux，因为是阉割版，取精华的版本。vue的官方插件叫做vuex实现了它。 全局状态，数据的单向流动！ Vue还有没有别的技术栈，有！但是vuex这个栈是最普遍的，最正统的。 Vue还有没有别的全局控制状态的方法，有！比如将app通过组件的props实参传输给每个子组件，不优雅。 官网：http://vuex.vuejs.org/zh-cn/intro.html">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://bensonwu.com/"/>
+  <link rel="canonical" href="http://bensonwu.com/2018/05/17/vuex/"/>
 
 
 
 
 
-  <title>Benson</title>
+  <title>Vuex入门 | Benson</title>
   
 
 
@@ -143,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -237,9 +238,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -269,9 +270,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/17/vuex/" itemprop="url">Vuex入门</a></h1>
+          <h1 class="post-title" itemprop="name headline">Vuex入门</h1>
         
 
         <div class="post-meta">
@@ -332,9 +331,7 @@
       
 
       
-        
-          
-            <p>Vuex<br>这个结构类似Flux和Redux，因为是阉割版，取精华的版本。vue的官方插件叫做vuex实现了它。 全局状态，数据的单向流动！</p>
+        <p>Vuex<br>这个结构类似Flux和Redux，因为是阉割版，取精华的版本。vue的官方插件叫做vuex实现了它。 全局状态，数据的单向流动！</p>
 <p>Vue还有没有别的技术栈，有！但是vuex这个栈是最普遍的，最正统的。 Vue还有没有别的全局控制状态的方法，有！比如将app通过组件的props实参传输给每个子组件，不优雅。</p>
 <p>官网：<a href="http://vuex.vuejs.org/zh-cn/intro.html" target="_blank" rel="noopener">http://vuex.vuejs.org/zh-cn/intro.html</a></p>
 <p>3.1 安装 加入依赖 cnpm install vuex –save</p>
@@ -387,8 +384,6 @@ computed : {
 <p>应用层级的状态应该集中到单个 store 对象中。 提交 mutation 是更改状态的唯一方法，并且这个过程是同步的。 异步逻辑都应该封装到 action 里面。</p>
 <p>只要你遵守以上规则，如何组织代码随你便。如果你的 store 文件太大，只需将 action、mutation、和 getters 分割到单独的文件。整合的方法用modules属性：<a href="http://vuex.vuejs.org/zh-cn/modules.html" target="_blank" rel="noopener">http://vuex.vuejs.org/zh-cn/modules.html</a></p>
 
-          
-        
       
     </div>
     
@@ -403,14 +398,20 @@ computed : {
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/vue/" rel="tag"># vue</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -420,10 +421,11 @@ computed : {
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -431,6 +433,20 @@ computed : {
 
 
           
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
 
         </div>
         
@@ -647,6 +663,10 @@ computed : {
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -664,6 +684,18 @@ computed : {
       <script id="dsq-count-scr" src="https://来必力.disqus.com/count.js" async></script>
     
 
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://bensonwu.com/2018/05/17/vuex/';
+          this.page.identifier = '2018/05/17/vuex/';
+          this.page.title = 'Vuex入门';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://来必力.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
     
 
   
