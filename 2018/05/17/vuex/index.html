@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Benson">
 <meta property="og:description" content="Vuex这个结构类似Flux和Redux，因为是阉割版，取精华的版本。vue的官方插件叫做vuex实现了它。 全局状态，数据的单向流动！ Vue还有没有别的技术栈，有！但是vuex这个栈是最普遍的，最正统的。 Vue还有没有别的全局控制状态的方法，有！比如将app通过组件的props实参传输给每个子组件，不优雅。 官网：http://vuex.vuejs.org/zh-cn/intro.html">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-22T02:15:21.826Z">
+<meta property="og:updated_time" content="2018-05-24T23:48:12.760Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vuex入门">
 <meta name="twitter:description" content="Vuex这个结构类似Flux和Redux，因为是阉割版，取精华的版本。vue的官方插件叫做vuex实现了它。 全局状态，数据的单向流动！ Vue还有没有别的技术栈，有！但是vuex这个栈是最普遍的，最正统的。 Vue还有没有别的全局控制状态的方法，有！比如将app通过组件的props实参传输给每个子组件，不优雅。 官网：http://vuex.vuejs.org/zh-cn/intro.html">
@@ -293,6 +293,28 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/vue/" itemprop="url" rel="index">
+                    <span itemprop="name">vue</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -393,6 +415,35 @@ computed : {
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Benson 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Benson 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
 
     
 
@@ -445,7 +496,7 @@ computed : {
     </div>
 
   
-
+  
 
 
         </div>
@@ -494,15 +545,24 @@ computed : {
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">1</span>
                   <span class="site-state-item-name">标签</span>
-                
+                </a>
               </div>
             
 
@@ -681,7 +741,7 @@ computed : {
   
 
     
-      <script id="dsq-count-scr" src="https://来必力.disqus.com/count.js" async></script>
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
     
 
     
@@ -692,7 +752,7 @@ computed : {
           this.page.title = 'Vuex入门';
         };
         var d = document, s = d.createElement('script');
-        s.src = 'https://来必力.disqus.com/embed.js';
+        s.src = 'https://.disqus.com/embed.js';
         s.setAttribute('data-timestamp', '' + +new Date());
         (d.head || d.body).appendChild(s);
       </script>
@@ -713,6 +773,20 @@ computed : {
 
 
 
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
 
 
 
