@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang="zh-Hans">
+<html class="theme-next pisces use-motion" lang="zh-Hans">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="Benson">
 <meta property="og:description" content="Vuex这个结构类似Flux和Redux，因为是阉割版，取精华的版本。vue的官方插件叫做vuex实现了它。 全局状态，数据的单向流动！ Vue还有没有别的技术栈，有！但是vuex这个栈是最普遍的，最正统的。 Vue还有没有别的全局控制状态的方法，有！比如将app通过组件的props实参传输给每个子组件，不优雅。 官网：http://vuex.vuejs.org/zh-cn/intro.html">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-24T23:48:12.760Z">
+<meta property="og:updated_time" content="2018-05-28T09:48:26.720Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Vuex入门">
 <meta name="twitter:description" content="Vuex这个结构类似Flux和Redux，因为是阉割版，取精华的版本。vue的官方插件叫做vuex实现了它。 全局状态，数据的单向流动！ Vue还有没有别的技术栈，有！但是vuex这个栈是最普遍的，最正统的。 Vue还有没有别的全局控制状态的方法，有！比如将app通过组件的props实参传输给每个子组件，不优雅。 官网：http://vuex.vuejs.org/zh-cn/intro.html">
@@ -98,7 +98,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Gemini',
+    scheme: 'Pisces',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -362,45 +362,16 @@
 <p>Vuex 是一个专为 Vue.js 应用程序开发的状态管理模式vuex。它采用集中式存储管理应用的所有组件的状态，并以相应的规则保证状态以一种可预测的方式发生变化</p>
 <p>与Redux比，少了Dispatcher和Reducer。 但是，当我们的应用遇到多个组件共享状态时，单向数据流的简洁性很容易被破坏： 多个视图依赖于同一状态。 来自不同视图的行为需要变更同一状态。 对于问题一，传参的方法对于多层嵌套的组件将会非常繁琐，并且对于兄弟组件间的状态传递无能为力。对于问题二，我们经常会采用父子组件直接引用或者通过事件来变更和同步状态的多份拷贝。以上的这些模式非常脆弱，通常会导致无法维护的代码。 因此，我们为什么不把组件的共享状态抽取出来，以一个全局单例模式管理呢？在这种模式下，我们的组件树构成了一个巨大的“视图”，不管在树的哪个位置，任何组件都能获取状态或者触发行为！ 另外，通过定义和隔离状态管理中的各种概念并强制遵守一定的规则，我们的代码将会变得更结构化且易维护。 这就是 Vuex 背后的基本思想，借鉴了 Flux、Redux、和 The Elm Architecture。与其他模式不同的是，Vuex 是专门为 Vue.js 设计的状态管理库，以利用 Vue.js 的细粒度数据响应机制来进行高效的状态更新。</p>
 <p>3.3 基本使用 - store对象</p>
-<p>第一步要创建一个store对象，在Vue2.x中，配合路由使用的时候，我们要把store写到单独文件里面，然后暴露。所有组件都import这个store.js。 实际上，我们为了所有的组件都有store的定义，要把store.js文件单独写为一个文件store.js，然后所有组件里面进行引用。 store.js 文件： import Vue from “vue”; import Vuex from “vuex”; Vue.use(Vuex);</p>
-<p>//创建一个vuex的store对象<br>export default new Vuex.Store({<br>    //全局共享状态<br>    state: {<br>        a: 123,<br>        arr : [5,6,33,45,5,32,12],<br>    }<br>    //突变，就是类似Redux中的reducer干的事情。不是大写字母，没有type。<br>    mutations: {<br>        add(state) {<br>          state.a++<br>        },</p>
-<pre><code>    minus(state) {
-      state.a--
-    }
-}
-</code></pre><p>});<br>main.js中： import Vue from “vue”; import VueRouter from “vue-router”; import store from “./store.js”; Vue.use(VueRouter);</p>
-<p>import routes from “./routes.config.js”;</p>
-<p>//创建 router 实例，传入routes参数，值就是刚才那个数组 const router = new VueRouter({ routes });</p>
-<p>//创建和挂载根实例，创建的时候Vue构造函数中要添加router属性 var app = new Vue({ router }).$mount(‘#app’);</p>
-<p>App.vue组件中要引用import store这个东西。<br>通过export default可以暴露store.js的，没有问题。但是API上面还要一种方法，就是在new 根的时候，传入store实例： import Vue from “vue”; import VueRouter from “vue-router”; import store from “./store/index.js”; //插件 Vue.use(VueRouter);</p>
-<p>import routes from “./routes.config.js”;</p>
-<p>//创建 router 实例，传入routes参数，值就是刚才那个数组 const router = new VueRouter({ routes });</p>
-<p>//创建和挂载根实例，创建的时候Vue构造函数中要添加router属性 var app = new Vue({ router, store }).$mount(‘#app’);</p>
-<p>3.4 getter</p>
-<p>import Vue from “vue”; import VueRouter from “vue-router”; import Vuex from “vuex”; Vue.use(VueRouter); Vue.use(Vuex);</p>
-<p>import routes from “./routes.config.js”;</p>
-<p>//创建 router 实例，传入routes参数，值就是刚才那个数组 const router = new VueRouter({ routes });</p>
-<p>//创建一个vuex的store对象 const store = new Vuex.Store({ //全局共享状态 state: { a: 123, arr : [5,6,33,45,5,32,12], }, getters : { arrdayushi : function(state){ return state.arr.filter((item)=&gt;{ return item &gt; 10; }); } }, //突变，就是类似Redux中的reducer干的事情 mutations: { add(state) { state.a++ }, minus(state) { state.a– } } });</p>
-<p>//创建和挂载根实例，创建的时候Vue构造函数中要添加router属性 var app = new Vue({ router , computed :{ a : function(){ return store.state.a }, arrdayushi : function(){ return store.getters.arrdayushi } }, methods : { add(){ store.commit(‘add’); //发出一个action }, minus(){ store.commit(‘minus’); } } }).$mount(‘#app’);</p>
+<p>第一步要创建一个store对象，在Vue2.x中，配合路由使用的时候，我们要把store写到单独文件里面，然后暴露。所有组件都import这个store.js。 实际上，我们为了所有的组件都有store的定义，要把store.js文件单独写为一个文件store.js，然后所有组件里面进行引用。 store.js 文件：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">"vue"</span>; <span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">"vuex"</span>; Vue.use(Vuex);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个vuex的store对象</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Vuex.Store(&#123;</span><br><span class="line">    <span class="comment">//全局共享状态</span></span><br><span class="line">    state: &#123;</span><br><span class="line">        a: <span class="number">123</span>,</span><br><span class="line">        arr : [<span class="number">5</span>,<span class="number">6</span>,<span class="number">33</span>,<span class="number">45</span>,<span class="number">5</span>,<span class="number">32</span>,<span class="number">12</span>],</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//突变，就是类似Redux中的reducer干的事情。不是大写字母，没有type。</span></span><br><span class="line">    mutations: &#123;</span><br><span class="line">        add(state) &#123;</span><br><span class="line">          state.a++</span><br><span class="line">        &#125;,</span><br><span class="line"></span><br><span class="line">        minus(state) &#123;</span><br><span class="line">          state.a--</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>main.js中：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">"vue"</span>; <span class="keyword">import</span> VueRouter <span class="keyword">from</span> <span class="string">"vue-router"</span>; <span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">"./store.js"</span>; Vue.use(VueRouter);</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> routes <span class="keyword">from</span> <span class="string">"./routes.config.js"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建 router 实例，传入routes参数，值就是刚才那个数组 const router = new VueRouter(&#123; routes &#125;);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建和挂载根实例，创建的时候Vue构造函数中要添加router属性 var app = new Vue(&#123; router &#125;).$mount('#app');</span></span><br><span class="line"></span><br><span class="line">App.vue组件中要引用<span class="keyword">import</span> store这个东西。</span><br><span class="line">通过<span class="keyword">export</span> <span class="keyword">default</span>可以暴露store.js的，没有问题。但是API上面还要一种方法，就是在<span class="keyword">new</span> 根的时候，传入store实例： <span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">"vue"</span>; <span class="keyword">import</span> VueRouter <span class="keyword">from</span> <span class="string">"vue-router"</span>; <span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">"./store/index.js"</span>; <span class="comment">//插件 Vue.use(VueRouter);</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> routes <span class="keyword">from</span> <span class="string">"./routes.config.js"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建 router 实例，传入routes参数，值就是刚才那个数组 const router = new VueRouter(&#123; routes &#125;);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建和挂载根实例，创建的时候Vue构造函数中要添加router属性 var app = new Vue(&#123; router, store &#125;).$mount('#app');</span></span><br></pre></td></tr></table></figure></p>
+<p>3.4 getter<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">"vue"</span>; <span class="keyword">import</span> VueRouter <span class="keyword">from</span> <span class="string">"vue-router"</span>; <span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">"vuex"</span>; Vue.use(VueRouter); Vue.use(Vuex);</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> routes <span class="keyword">from</span> <span class="string">"./routes.config.js"</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建 router 实例，传入routes参数，值就是刚才那个数组 const router = new VueRouter(&#123; routes &#125;);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个vuex的store对象 const store = new Vuex.Store(&#123; //全局共享状态 state: &#123; a: 123, arr : [5,6,33,45,5,32,12], &#125;, getters : &#123; arrdayushi : function(state)&#123; return state.arr.filter((item)=&gt;&#123; return item &gt; 10; &#125;); &#125; &#125;, //突变，就是类似Redux中的reducer干的事情 mutations: &#123; add(state) &#123; state.a++ &#125;, minus(state) &#123; state.a-- &#125; &#125; &#125;);</span></span><br><span class="line"></span><br><span class="line"><span class="comment">//创建和挂载根实例，创建的时候Vue构造函数中要添加router属性 var app = new Vue(&#123; router , computed :&#123; a : function()&#123; return store.state.a &#125;, arrdayushi : function()&#123; return store.getters.arrdayushi &#125; &#125;, methods : &#123; add()&#123; store.commit('add'); //发出一个action &#125;, minus()&#123; store.commit('minus'); &#125; &#125; &#125;).$mount('#app');</span></span><br></pre></td></tr></table></figure></p>
 <p>3.5 mutation</p>
-<p>类似reducer的东西，不过不是Type定义的，而是函数。 更改 Vuex 的 store 中的状态的唯一方法是commit 一个mutation。Vuex 中的 mutations 非常类似于事件：每个 mutation 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)。这个回调函数就是我们实际进行状态更改的地方，并且它会接受 state 作为第一个参数，改变就是改变这个state，而不是类似Redux那样的返回一个新state。 如果需要传输参数，那么你可以向 store.commit 传入额外的参数，即 mutation 的 载荷（payload）： import Vue from “vue”; import Vuex from “vuex”; Vue.use(Vuex);</p>
-<p>//创建一个vuex的store对象 export default new Vuex.Store({ …… , mutations: { add(state,n) { state.a+=n; },</p>
-<pre><code>minus(state) {
-  state.a--
-}
-</code></pre><p>}<br>});</p>
-<p>调用的时候： import store from “../store/index.js”; export default { methods : { add(){ store.commit(“add”,3); }, minus(){ store.commit(“minus”); } }, data(){</p>
-<pre><code>},
-computed : {
-    getA(){
-        return store.state.a;
-    }
-}
-</code></pre><p>}<br>3.6 Action</p>
+<p>类似reducer的东西，不过不是Type定义的，而是函数。 更改 Vuex 的 store 中的状态的唯一方法是commit 一个mutation。Vuex 中的 mutations 非常类似于事件：每个 mutation 都有一个字符串的 事件类型 (type) 和 一个 回调函数 (handler)。这个回调函数就是我们实际进行状态更改的地方，并且它会接受 state 作为第一个参数，改变就是改变这个state，而不是类似Redux那样的返回一个新state。 如果需要传输参数，那么你可以向 store.commit 传入额外的参数，即 mutation 的 载荷（payload）：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">"vue"</span>;</span><br><span class="line"> <span class="keyword">import</span> Vuex <span class="keyword">from</span> <span class="string">"vuex"</span>; Vue.use(Vuex);</span><br><span class="line"></span><br><span class="line"><span class="comment">//创建一个vuex的store对象 export default new Vuex.Store(&#123; …… , mutations: &#123; add(state,n) &#123; state.a+=n; &#125;,</span></span><br><span class="line"></span><br><span class="line">    minus(state) &#123;</span><br><span class="line">      state.a--</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>调用的时候：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> store <span class="keyword">from</span> <span class="string">"../store/index.js"</span>;</span><br><span class="line"> <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line"> methods : &#123;</span><br><span class="line">  add()&#123; store.commit(<span class="string">"add"</span>,<span class="number">3</span>); &#125;,</span><br><span class="line">  minus()&#123; store.commit(<span class="string">"minus"</span>); &#125; &#125;,</span><br><span class="line">   data()&#123;</span><br><span class="line"></span><br><span class="line">    &#125;,</span><br><span class="line">    computed : &#123;</span><br><span class="line">        getA()&#123;</span><br><span class="line">            <span class="keyword">return</span> store.state.a;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>3.6 Action</p>
 <p>用户交互 → Action → dispatch → mutation → 改变视图</p>
 <p>store.commit()是触发mutation改变的 store.dispatch()是触发action改变的</p>
-<p>乍一眼看上去感觉多此一举，我们直接分发 mutation 岂不更方便？实际上并非如此，还记得 mutation 必须同步执行这个限制么？Action 就不受约束！我们可以在 action 内部执行异步操作： store.js import Vue from “vue”; import Vuex from “vuex”; Vue.use(Vuex);</p>
-<p>//创建一个vuex的store对象 export default new Vuex.Store({ 。。。省略, actions: { add ({commit}) { $.get(“/api/number.txt”,function(data){ commit(‘add’,{v:parseInt(data)}); }); } } });</p>
+<p>乍一眼看上去感觉多此一举，我们直接分发 mutation 岂不更方便？实际上并非如此，还记得 mutation 必须同步执行这个限制么？Action 就不受约束！我们可以在 action 内部执行异步操作：<br>store.js<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import Vue from &quot;vue&quot;; import Vuex from &quot;vuex&quot;; Vue.use(Vuex);</span><br><span class="line"></span><br><span class="line">//创建一个vuex的store对象</span><br><span class="line"> export default new Vuex.Store(&#123; 。。。省略, actions: &#123; add (&#123;commit&#125;) &#123; $.get(&quot;/api/number.txt&quot;,function(data)&#123; commit(&apos;add&apos;,&#123;v:parseInt(data)&#125;); &#125;); &#125; &#125; &#125;);</span><br></pre></td></tr></table></figure></p>
 <p>App.vue里面：<br>3.7 项目结构</p>
 <p>Vuex 并不限制你的代码结构。但是，它规定了一些需要遵守的规则：</p>
 <p>应用层级的状态应该集中到单个 store 对象中。 提交 mutation 是更改状态的唯一方法，并且这个过程是同步的。 异步逻辑都应该封装到 action 里面。</p>
@@ -615,7 +586,7 @@ computed : {
 
 
 
-  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
 
 
 
