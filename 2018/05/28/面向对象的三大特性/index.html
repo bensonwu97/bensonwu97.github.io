@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="js," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="面向对象的三大特性:封装 继承 多态 继承的简单理解：继承可以减少代码重复我们一般将相同的属性放在父类中自己独特的属性放在自身对象中下面通过几个场景分析两个对象之间的相同属性和不同属性继承的语法结构：123456789101112131415161718192021222324252627282930313233343536373839404142   //基类 父类   var Person =">
+<meta name="keywords" content="js">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向对象的三大特性">
+<meta property="og:url" content="http://bensonwu.com/2018/05/28/面向对象的三大特性/index.html">
+<meta property="og:site_name" content="Benson">
+<meta property="og:description" content="面向对象的三大特性:封装 继承 多态 继承的简单理解：继承可以减少代码重复我们一般将相同的属性放在父类中自己独特的属性放在自身对象中下面通过几个场景分析两个对象之间的相同属性和不同属性继承的语法结构：123456789101112131415161718192021222324252627282930313233343536373839404142   //基类 父类   var Person =">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-06T13:56:08.938Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="面向对象的三大特性">
+<meta name="twitter:description" content="面向对象的三大特性:封装 继承 多态 继承的简单理解：继承可以减少代码重复我们一般将相同的属性放在父类中自己独特的属性放在自身对象中下面通过几个场景分析两个对象之间的相同属性和不同属性继承的语法结构：123456789101112131415161718192021222324252627282930313233343536373839404142   //基类 父类   var Person =">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://bensonwu.com/2018/05/28/面向对象的三大特性/"/>
+
+
+
+
+
+  <title>面向对象的三大特性 | Benson</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Benson</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://bensonwu.com/2018/05/28/面向对象的三大特性/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Benson">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://wx1.sinaimg.cn/large/63ef3b4egy1fcxx039lx2j20bt0brt8s.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Benson">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">面向对象的三大特性</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-28T18:25:33+08:00">
+                2018-05-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/js/" itemprop="url" rel="index">
+                    <span itemprop="name">js</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/28/面向对象的三大特性/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/28/面向对象的三大特性/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><b>面向对象的三大特性:封装 继承 多态</b></p>
+<h2 id="继承的简单理解："><a href="#继承的简单理解：" class="headerlink" title="继承的简单理解："></a>继承的简单理解：</h2><p>继承可以减少代码重复<br>我们一般将相同的属性放在父类中<br>自己独特的属性放在自身对象中<br>下面通过几个场景分析两个对象之间的相同属性和不同属性<br>继承的语法结构：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">   <span class="comment">//基类 父类</span></span><br><span class="line">   <span class="keyword">var</span> Person = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="keyword">this</span>.name = <span class="string">'张三'</span>;</span><br><span class="line">       <span class="keyword">this</span>.age = <span class="number">20</span>;</span><br><span class="line">   &#125;</span><br><span class="line">   Person.prototype = &#123;</span><br><span class="line">       say : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">           <span class="built_in">console</span>.log(<span class="string">'Person.prototype - say'</span>);</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//构造函数</span></span><br><span class="line">  <span class="comment">/* 如何实现继承：</span></span><br><span class="line"><span class="comment">   1 构造函数</span></span><br><span class="line"><span class="comment">   1 原型*/</span></span><br><span class="line">   <span class="keyword">var</span> Student = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       Person.call(<span class="keyword">this</span>, <span class="built_in">arguments</span>);</span><br><span class="line"></span><br><span class="line">       <span class="comment">//子类也可以拥有自己的一些属性和方法</span></span><br><span class="line">       <span class="keyword">this</span>.sID=<span class="string">'000001'</span></span><br><span class="line">       <span class="keyword">this</span>.jiemu = <span class="string">'唱歌'</span></span><br><span class="line">       <span class="keyword">this</span>.luobenTimes= <span class="number">0</span></span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">//学生继承person,则拥有person原型中的方法</span></span><br><span class="line">   Student.prototype = <span class="keyword">new</span> Person();</span><br><span class="line"></span><br><span class="line">   <span class="comment">/*以前：实现继承：学生可以访问人的所有属性和方法</span></span><br><span class="line"><span class="comment">   儿子拥有父亲的某些特定*/</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">   <span class="comment">//子类也可以拥有自己的一些属性和方法</span></span><br><span class="line">   Student.prototype.getTeacher = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">       <span class="built_in">console</span>.log(‘Benson<span class="string">');</span></span><br><span class="line"><span class="string">   &#125;</span></span><br><span class="line"><span class="string">/*   Student.prototype=&#123;&#125;*/</span></span><br><span class="line"><span class="string">   //测试 -- 学生类拥有了person中的方法</span></span><br><span class="line"><span class="string">   var xiaoWang = new Student();</span></span><br><span class="line"><span class="string">   //xiaoWang.name = '</span>张三<span class="string">'</span></span><br><span class="line"><span class="string">   console.log(xiaoWang.name)</span></span><br><span class="line"><span class="string">   xiaoWang.say()</span></span><br><span class="line"><span class="string">   xiaoWang.getTeacher()</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="继承的九重境界"><a href="#继承的九重境界" class="headerlink" title="继承的九重境界"></a>继承的九重境界</h2><ul>
+<li>Object中的继承 – 最简单的继承</li>
+<li>内置对象的继承</li>
+<li>自定义对象的继承</li>
+<li>多种继承实现方式</li>
+<li>第三方框架实现继承</li>
+<li>面向对象三大特性和继承</li>
+<li>面向未来变化编程和继承</li>
+<li>面向接口编程和继承</li>
+<li>设计模式 忘记模式 无招胜有招</li>
+</ul>
+<h2 id="第一层-从继承的角度理解原型创建对象"><a href="#第一层-从继承的角度理解原型创建对象" class="headerlink" title="第一层 从继承的角度理解原型创建对象"></a>第一层 从继承的角度理解原型创建对象</h2><p>继承就是定义一个新的对象，继承另一个对象的方法和属性<br>前面通过原型方式创建一个对象A，其可以使用Object中的所有属性和方法，这里我们就说A对象继承了Object对象。<br>继承的本质就是通过<strong>proto</strong>指针指向某个对象，系统能够自动链式访问所指向的对象的属性方法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> o = <span class="keyword">new</span> <span class="built_in">Object</span>();</span><br><span class="line">        <span class="comment">//这里其实就是继承，我新创建的一个对象，然后继承Object的所有属性和方法，也就是可以使用Object的所有属性和方法</span></span><br><span class="line">        <span class="comment">//这里继承并不是新的概念，只是前面我们没讲这个玩意有个学名叫做继承</span></span><br><span class="line">        <span class="comment">//alert(o.toString()); //能否访问，说明确实继承了Object</span></span><br><span class="line">         alert(o.__proto__ === <span class="built_in">Object</span>.prototype);  <span class="comment">//true 继承的本质 -- 为什么能访问Object对象的方法，其实访问的是其原型对象的方法 所有的方法都是放在原型中而不是类中</span></span><br><span class="line">        <span class="comment">//alert(o.__proto__ === Object);</span></span><br><span class="line">        <span class="comment">//alert(Object.__proto__ === Function.prototype);</span></span><br><span class="line">        <span class="comment">//alert(Function.prototype.__proto__ === Object.prototype);</span></span><br><span class="line">        <span class="comment">//alert(Number.__proto__ === Function.prototype);</span></span><br><span class="line">        <span class="comment">//object是万物祖先</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="第二层内置对象的继承关系"><a href="#第二层内置对象的继承关系" class="headerlink" title="第二层内置对象的继承关系"></a>第二层内置对象的继承关系</h2><p>所有的内置对象都继承在Object，除了拥有自身的方法和属性之外，还拥有Object的所有属性和方法<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实例化一个数字对象</span></span><br><span class="line">    <span class="keyword">var</span> myNumber = <span class="keyword">new</span> <span class="built_in">Number</span>(<span class="number">10</span>);</span><br><span class="line">    <span class="comment">//字符串对象 -- 其实是String对象的一个实例化</span></span><br><span class="line">    <span class="keyword">var</span> s = <span class="string">'shukuiwang'</span>;</span><br><span class="line">    <span class="comment">//除了可以访问自身属性方法，还能访问父类属性方法</span></span><br><span class="line">    alert(s.toUpperCase());</span><br><span class="line">    alert(s.toString());</span><br></pre></td></tr></table></figure></p>
+<h2 id="第三层自定义对象的继承"><a href="#第三层自定义对象的继承" class="headerlink" title="第三层自定义对象的继承"></a>第三层自定义对象的继承</h2><p>继承的本质就是通过<strong>proto</strong>指针指向某个对象，系统能够自动链式访问所指向的对象的属性方法。<br>那么对于自定义对象的继承，只需要让第二个对象的<strong>proto</strong>指向另一个对象即可<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//基类</span></span><br><span class="line"><span class="keyword">var</span> Person = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name=<span class="string">'傻郭靖'</span></span><br><span class="line">    <span class="keyword">this</span>.test=<span class="string">'测试的属性'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//</span></span><br><span class="line">Person.prototype = &#123;</span><br><span class="line">    say : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        alert(<span class="string">'Person.prototype - say'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//构造函数</span></span><br><span class="line"><span class="keyword">var</span> Student = <span class="function"><span class="keyword">function</span>(<span class="params">name, age, lesson</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.lesson = lesson;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//学生继承person,则拥有person原型中的方法</span></span><br><span class="line">Student.prototype = <span class="keyword">new</span> Person();</span><br><span class="line">Student.prototype.getTeacher = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    alert(<span class="string">'Student.prototype.getTeacher'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//测试 -- 学生类拥有了person中的方法</span></span><br><span class="line"><span class="keyword">var</span> xiaoWang = <span class="keyword">new</span> Student(<span class="string">'wang'</span>, <span class="number">20</span>, <span class="string">'javascript'</span>);</span><br><span class="line">xiaoWang.say();</span><br><span class="line"><span class="built_in">console</span>.log(xiaoWang.name);</span><br><span class="line"><span class="built_in">console</span>.log(xiaoWang.test);</span><br><span class="line"><span class="comment">//测试person 和student其实指向同一个地址</span></span><br><span class="line"><span class="keyword">var</span> person = <span class="keyword">new</span> Person();</span><br><span class="line">person.getTeacher();</span><br><span class="line"></span><br><span class="line"><span class="comment">//老师继承person  则拥有person 的原型中的方法和属性</span></span><br><span class="line"><span class="keyword">var</span> Teacher = <span class="function"><span class="keyword">function</span>(<span class="params">name, age, subject</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name = name;</span><br><span class="line">    <span class="keyword">this</span>.age = age;</span><br><span class="line">    <span class="keyword">this</span>.subject = subject;</span><br><span class="line">&#125;</span><br><span class="line">Teacher.prototype = <span class="keyword">new</span> Person();</span><br><span class="line">Teacher.prototype.getCollage = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'网页平面'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//测试老师拥有了person的方法</span></span><br><span class="line"><span class="keyword">var</span> xiaoMing = <span class="keyword">new</span> Teacher(<span class="string">'zhang'</span>, <span class="number">25</span>, <span class="string">'javascript'</span>);</span><br><span class="line">xiaoMing.say();</span><br><span class="line"><span class="comment">//存在的问题</span></span><br><span class="line"><span class="comment">//1共享属性问题</span></span><br><span class="line"><span class="comment">//2在构造函数中,无法使用new Student("00001" , "张三" , 12) ；创建对象，并初始化name和age属性，</span></span><br><span class="line"> <span class="comment">//必须stu.name, stu.age进行赋值</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="第四层-多种继承方式"><a href="#第四层-多种继承方式" class="headerlink" title="第四层 多种继承方式"></a>第四层 多种继承方式</h2><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//基类</span></span><br><span class="line">    <span class="keyword">var</span> Person = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = <span class="string">'张三'</span>;</span><br><span class="line">        <span class="keyword">this</span>.age = <span class="number">20</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    Person.prototype = &#123;</span><br><span class="line">        say : <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'Person.prototype - say'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//构造函数</span></span><br><span class="line">    <span class="keyword">var</span> Student = <span class="function"><span class="keyword">function</span>(<span class="params">name,age,sex</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.sex = sex</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//学生继承person,则拥有person原型中的方法</span></span><br><span class="line">    Student.prototype = <span class="keyword">new</span> Person();</span><br><span class="line">    Student.prototype.getTeacher = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Student.prototype.getTeacher'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//测试 -- 学生类拥有了person中的方法</span></span><br><span class="line">    <span class="keyword">var</span> xiaoWang = <span class="keyword">new</span> Student(<span class="string">'小王'</span>,<span class="number">10</span>,<span class="string">'男'</span>);</span><br><span class="line">    <span class="comment">//xiaoWang.name = '张三'</span></span><br><span class="line">    <span class="built_in">console</span>.log(xiaoWang.name)</span><br><span class="line">    xiaoWang.say()</span><br><span class="line">    xiaoWang.getTeacher()</span><br><span class="line">    <span class="comment">/*存在的问题*/</span></span><br><span class="line">    <span class="comment">/*无法通过参数定义对象*/</span></span><br><span class="line">    <span class="built_in">console</span>.log(xiaoWang.name)</span><br><span class="line">    <span class="built_in">console</span>.log(xiaoWang.age)</span><br><span class="line">    <span class="comment">/*解决方式*/</span></span><br><span class="line">    xiaoWang.name = <span class="string">'神仙'</span></span><br><span class="line">    xiaoWang.age = <span class="number">100</span></span><br><span class="line">    <span class="built_in">console</span>.log(xiaoWang.name)</span><br><span class="line">    <span class="built_in">console</span>.log(xiaoWang.age)</span><br></pre></td></tr></table></figure>
+<h3 id="原型继承存在的问题"><a href="#原型继承存在的问题" class="headerlink" title="原型继承存在的问题"></a>原型继承存在的问题</h3><p>无法传参<br>在Student的构造方法中，无法使用new Student(“00001” , “张三” , 12) ；<br>创建对象，并初始化name和age属性，必须stu.name, stu.age进行赋值</p>
+<h3 id="解决的最好方法-组合继承-实现了继承属性和方法"><a href="#解决的最好方法-组合继承-实现了继承属性和方法" class="headerlink" title="解决的最好方法- 组合继承 实现了继承属性和方法"></a>解决的最好方法- 组合继承 实现了继承属性和方法</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Person</span>(<span class="params">name, age</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.name=name</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.say = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Student</span>(<span class="params">name, age, no</span>) </span>&#123;</span><br><span class="line">    <span class="comment">/*会自动调用Person的方法，同时将name age传递过去*/</span></span><br><span class="line">    Person.call(<span class="keyword">this</span>,name,age);</span><br><span class="line">    <span class="comment">//自己的属性</span></span><br><span class="line">    <span class="keyword">this</span>.no = no;</span><br><span class="line">&#125;</span><br><span class="line">Student.prototype = <span class="keyword">new</span> Person();</span><br><span class="line"><span class="keyword">var</span> stu1 = <span class="keyword">new</span> Student(<span class="string">"0001"</span>,<span class="string">"张三"</span>,<span class="number">11</span>);</span><br><span class="line"><span class="built_in">console</span>.log(stu1.name)</span><br></pre></td></tr></table></figure>
+<h2 id="第五层-第三方框架实现继承"><a href="#第五层-第三方框架实现继承" class="headerlink" title="第五层 第三方框架实现继承"></a>第五层 第三方框架实现继承</h2><p>base2.js 具体就不说了自己看教程</p>
+<h2 id="第六层-封装性-多态性和继承的关系"><a href="#第六层-封装性-多态性和继承的关系" class="headerlink" title="第六层 封装性 多态性和继承的关系"></a>第六层 封装性 多态性和继承的关系</h2><h3 id="封装性："><a href="#封装性：" class="headerlink" title="封装性："></a>封装性：</h3><p>我们可以将方法属性归类到一个对象当中，比如产品对象放置和产品有关的方法，属性，这就是封装性</p>
+<h3 id="多态性："><a href="#多态性：" class="headerlink" title="多态性："></a>多态性：</h3><p>多态（英语：Polymorphism），是指面向对象程序运行时，相同的消息可能会送给多个不同的类之对象，而系统可依据对象所属类，引发对应类的方法，而有不同的行为</p>
+<h3 id="js不直接支持多态"><a href="#js不直接支持多态" class="headerlink" title="js不直接支持多态"></a>js不直接支持多态</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Add</span>(<span class="params">a,b</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a+b;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Add</span>(<span class="params">a,b,c</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a+b+c;</span><br><span class="line">    &#125;</span><br><span class="line">    alert(Add(<span class="number">2</span>,<span class="number">4</span>));</span><br><span class="line">    alert(Add(<span class="number">20</span>,<span class="number">30</span>,<span class="number">40</span>));</span><br><span class="line"><span class="string">`</span></span><br></pre></td></tr></table></figure>
+<h3 id="解决的方法"><a href="#解决的方法" class="headerlink" title="解决的方法"></a>解决的方法</h3><p>检测类型实现重载<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MyClass=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> AddNum=<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a+b;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">var</span> AddString=<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"I am here"</span>+a+b;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">this</span>.Add=<span class="function"><span class="keyword">function</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span>(a)==<span class="string">"number"</span>)</span><br><span class="line">            <span class="keyword">return</span> AddNum(a,b);</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> AddString(a,b);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> a+b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">a,b</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"I am here"</span>+a+b;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> MyObj = <span class="keyword">new</span> MyClass();</span><br><span class="line"><span class="keyword">var</span> X = MyObj.Add(<span class="number">5</span>,<span class="number">6</span>);</span><br><span class="line"><span class="keyword">var</span> Y = MyObj.Add(<span class="string">"A"</span>,<span class="string">"FFFFFF"</span>);</span><br><span class="line">alert(X); <span class="comment">//结果：11</span></span><br><span class="line">alert(Y); <span class="comment">//结果：I am hereAFFFFFF</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="第七层-面向接口编程"><a href="#第七层-面向接口编程" class="headerlink" title="第七层 面向接口编程"></a>第七层 面向接口编程</h2><h3 id="面向对象接口思维"><a href="#面向对象接口思维" class="headerlink" title="面向对象接口思维"></a>面向对象接口思维</h3><p>接口一般用于规定某个对象必须实现的方法<br>对于大型网站开发。如果采用面向对象开发。将系统分成多个模块（对象），我们可以像搭积木一样构建整个功能。<br>构建的时候我们面向接口编程。<br>首先每个模块提供一个接口。这个接口是恒定的，不变的。我们不关心内部是如何实现的。只关心这个接口如何使用的。<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//团队之间的口头约定</span></span><br><span class="line"><span class="comment">// 规定MP3，优盘对象必须实现USB接口</span></span><br><span class="line"><span class="comment">//接口一般以I开头</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> interface IUSB&#123;</span></span><br><span class="line"><span class="comment"> function read();</span></span><br><span class="line"><span class="comment"> function write();</span></span><br><span class="line"><span class="comment"> function clear();</span></span><br><span class="line"><span class="comment"> &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//比如我们再开发新浪体育板块</span></span><br><span class="line"><span class="comment">//规定所有模块（对象）必须实现update接口</span></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> interface IUpdate&#123;</span></span><br><span class="line"><span class="comment"> function update();</span></span><br><span class="line"><span class="comment"> &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">//口头约定只能靠各个团队自觉遵守，万一开发这个对象的人没有实现接口，则系统就会报错。</span></span><br><span class="line"><span class="comment">//为此，我们可以通过编程强制开发这个对象的人必须实现接口，对其开发的对象进行检测，查看是否是否实现接口</span></span><br><span class="line"><span class="comment">/* design interface*/</span></span><br><span class="line"><span class="comment">//1这里是定义一个接口，要求必须实现ABC三个方法:读，写，格式化</span></span><br><span class="line"><span class="keyword">var</span> USB = <span class="keyword">new</span> Interface(<span class="string">'USB'</span>,[<span class="string">'Read'</span>,<span class="string">'Write'</span>,<span class="string">'Clear'</span>]);</span><br><span class="line"><span class="comment">/* implements the methods of the interface*/</span></span><br><span class="line"><span class="comment">//2定义一个对象，实现接口</span></span><br><span class="line"><span class="keyword">var</span> MP3 = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</span><br><span class="line"><span class="keyword">this</span>.name = name;</span><br><span class="line">&#125;</span><br><span class="line">MP3.prototype.Read = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'MP3读功能'</span>);</span><br><span class="line">&#125;</span><br><span class="line">MP3.prototype.Write = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">'MP3写功能'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/*MP3.prototype.Clear = function()&#123;</span></span><br><span class="line"><span class="comment"> console.log('MP3格式化功能');</span></span><br><span class="line"><span class="comment">&#125;*/</span></span><br><span class="line">MP3.prototype.D = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"> <span class="built_in">console</span>.log(<span class="string">'自身方法，非接口方法'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//3面向接口编程</span></span><br><span class="line"><span class="built_in">window</span>.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line"><span class="keyword">var</span> mp3 = <span class="keyword">new</span> MP3(<span class="string">'王书奎'</span>);</span><br><span class="line"><span class="comment">//强制对象必须实现接口</span></span><br><span class="line"><span class="comment">//MP3必须实现USB接口</span></span><br><span class="line">Interface.ensureImplements(mp3,USB);</span><br><span class="line"><span class="comment">//使用该对象</span></span><br><span class="line">mp3.D();</span><br><span class="line">mp3.Read();</span><br><span class="line">mp3.Write();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="第八和第九层-省略一千字"><a href="#第八和第九层-省略一千字" class="headerlink" title="第八和第九层 省略一千字"></a>第八和第九层 省略一千字</h2>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>坚持原创技术分享，您的支持将鼓励我继续创作!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Benson 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Benson 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/js/" rel="tag"># js</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/28/VUE入门/" rel="next" title="Vue入门">
+                <i class="fa fa-chevron-left"></i> Vue入门
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/28/js面试题目/" rel="prev" title="JS面试题">
+                JS面试题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://wx1.sinaimg.cn/large/63ef3b4egy1fcxx039lx2j20bt0brt8s.jpg"
+                alt="Benson" />
+            
+              <p class="site-author-name" itemprop="name">Benson</p>
+              <p class="site-description motion-element" itemprop="description">一个前端切图仔</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#继承的简单理解："><span class="nav-number">1.</span> <span class="nav-text">继承的简单理解：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#继承的九重境界"><span class="nav-number">2.</span> <span class="nav-text">继承的九重境界</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第一层-从继承的角度理解原型创建对象"><span class="nav-number">3.</span> <span class="nav-text">第一层 从继承的角度理解原型创建对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第二层内置对象的继承关系"><span class="nav-number">4.</span> <span class="nav-text">第二层内置对象的继承关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三层自定义对象的继承"><span class="nav-number">5.</span> <span class="nav-text">第三层自定义对象的继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第四层-多种继承方式"><span class="nav-number">6.</span> <span class="nav-text">第四层 多种继承方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#原型继承存在的问题"><span class="nav-number">6.1.</span> <span class="nav-text">原型继承存在的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决的最好方法-组合继承-实现了继承属性和方法"><span class="nav-number">6.2.</span> <span class="nav-text">解决的最好方法- 组合继承 实现了继承属性和方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第五层-第三方框架实现继承"><span class="nav-number">7.</span> <span class="nav-text">第五层 第三方框架实现继承</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第六层-封装性-多态性和继承的关系"><span class="nav-number">8.</span> <span class="nav-text">第六层 封装性 多态性和继承的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#封装性："><span class="nav-number">8.1.</span> <span class="nav-text">封装性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多态性："><span class="nav-number">8.2.</span> <span class="nav-text">多态性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#js不直接支持多态"><span class="nav-number">8.3.</span> <span class="nav-text">js不直接支持多态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解决的方法"><span class="nav-number">8.4.</span> <span class="nav-text">解决的方法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第七层-面向接口编程"><span class="nav-number">9.</span> <span class="nav-text">第七层 面向接口编程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#面向对象接口思维"><span class="nav-number">9.1.</span> <span class="nav-text">面向对象接口思维</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第八和第九层-省略一千字"><span class="nav-number">10.</span> <span class="nav-text">第八和第九层 省略一千字</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Benson</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'http://bensonwu.com/2018/05/28/面向对象的三大特性/';
+          this.page.identifier = '2018/05/28/面向对象的三大特性/';
+          this.page.title = '面向对象的三大特性';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+  
+  <script type="text/javascript">
+    var GUEST = ['nick','mail','link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item=>{
+      return GUEST.indexOf(item)>-1;
+    });
+    new Valine({
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        appId: 'xQcDVWVr18dYzYcmriIhbU8F-gzGzoHsz',
+        appKey: '8ubrT3kGY7bXdHtaRO85Dmzg',
+        placeholder: 'ヾﾉ≧∀≦)o来啊，快活啊!',
+        avatar:'mm',
+        guest_info:guest,
+        pageSize:'10' || 10,
+    });
+  </script>
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"superSample":2,"width":80,"height":100,"position":"left","hOffset":0,"vOffset":-10},"mobile":{"show":true,"scale":0.1},"react":{"opacityDefault":0.7,"opacityOnHover":0.2},"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/"});</script></body>
+</html>
