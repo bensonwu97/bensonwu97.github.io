@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="##找出下面代码的规律并且编写一个函数，转换特定的整数到对应的字符串。1 =&amp;gt; A，2 =&amp;gt; B，3 =&amp;gt; C，…，26 =&amp;gt; Z，27 =&amp;gt; AA，28 =&amp;gt; AB，29 =&amp;gt; AC，…，52 =&amp;gt; AZ，53 =&amp;gt; BA，…js function convert (num) { } ###答案js function convert(n) {">
+<meta name="description" content="##找出下面代码的规律并且编写一个函数，转换特定的整数到对应的字符串。1 =&amp;gt; A，2 =&amp;gt; B，3 =&amp;gt; C，…，26 =&amp;gt; Z，27 =&amp;gt; AA，28 =&amp;gt; AB，29 =&amp;gt; AC，…，52 =&amp;gt; AZ，53 =&amp;gt; BA，… 12function convert (num) &amp;#123;&amp;#125; ###答案 12345678910fun">
 <meta name="keywords" content="js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="有趣的算法题">
 <meta property="og:url" content="http://bensonwu.com/2018/07/20/有趣的算法题/index.html">
 <meta property="og:site_name" content="Benson">
-<meta property="og:description" content="##找出下面代码的规律并且编写一个函数，转换特定的整数到对应的字符串。1 =&amp;gt; A，2 =&amp;gt; B，3 =&amp;gt; C，…，26 =&amp;gt; Z，27 =&amp;gt; AA，28 =&amp;gt; AB，29 =&amp;gt; AC，…，52 =&amp;gt; AZ，53 =&amp;gt; BA，…js function convert (num) { } ###答案js function convert(n) {">
+<meta property="og:description" content="##找出下面代码的规律并且编写一个函数，转换特定的整数到对应的字符串。1 =&amp;gt; A，2 =&amp;gt; B，3 =&amp;gt; C，…，26 =&amp;gt; Z，27 =&amp;gt; AA，28 =&amp;gt; AB，29 =&amp;gt; AC，…，52 =&amp;gt; AZ，53 =&amp;gt; BA，… 12function convert (num) &amp;#123;&amp;#125; ###答案 12345678910fun">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-10T21:49:48.054Z">
+<meta property="og:updated_time" content="2018-09-11T01:14:30.542Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="有趣的算法题">
-<meta name="twitter:description" content="##找出下面代码的规律并且编写一个函数，转换特定的整数到对应的字符串。1 =&amp;gt; A，2 =&amp;gt; B，3 =&amp;gt; C，…，26 =&amp;gt; Z，27 =&amp;gt; AA，28 =&amp;gt; AB，29 =&amp;gt; AC，…，52 =&amp;gt; AZ，53 =&amp;gt; BA，…js function convert (num) { } ###答案js function convert(n) {">
+<meta name="twitter:description" content="##找出下面代码的规律并且编写一个函数，转换特定的整数到对应的字符串。1 =&amp;gt; A，2 =&amp;gt; B，3 =&amp;gt; C，…，26 =&amp;gt; Z，27 =&amp;gt; AA，28 =&amp;gt; AB，29 =&amp;gt; AC，…，52 =&amp;gt; AZ，53 =&amp;gt; BA，… 12function convert (num) &amp;#123;&amp;#125; ###答案 12345678910fun">
 
 
 
@@ -363,73 +363,12 @@
       
 
       
-        <p>##找出下面代码的规律并且编写一个函数，转换特定的整数到对应的字符串。<br>1 =&gt; A，2 =&gt; B，3 =&gt; C，…，26 =&gt; Z，27 =&gt; AA，28 =&gt; AB，29 =&gt; AC，…，52 =&gt; AZ，53 =&gt; BA，…<br><code>js
-function convert (num) {
-}</code></p>
-<p>###答案<br><code>js
-function convert(n) {
-    var s = &#39;&#39;;
-    while (n&gt;0) {
-        var m = n % 26;
-        if (m==0) m = 26;
-        s = String.fromCharCode(m + 64) + s;
-        n = (n - m) / 26;
-    }
-    return s;
-}</code></p>
-<p>##题目1：编写一个 People 类，使其的实例具有监听事件、触发事件、解除绑定功能。（实例可能监听多个不同的事件，也可以去除监听事件）<br><code></code>js<br>/*</p>
-<ul>
-<li>TODO<br><em>
-</em>/</li>
-</ul>
-<p>People.prototype.sayHi = function () {<br>    console.log(‘Hi, I am ‘ + this.name)<br>}</p>
-<p>// 目标效果：</p>
-<p>var jerry = new People(‘Jerry’)<br>jerry.sayHi() // =&gt; 输出：’Hi, I am Jerry’</p>
-<p>jerry.on(‘greeting’, say)<br>jerry.on(‘greeting’, say2)<br>jerry.emit(‘greeting’, ‘Hi’) // =&gt; 输出：’Hi, nice meeting you.’ 和 ‘Hi, nice meeting you, too’<br>jerry.off(‘greeting’, say)<br>jerry.emit(‘greeting’, ‘Hi’) // =&gt; 只输出：’Hi, nice meeting you, too’</p>
-<p>function say (greeting) {<br>  console.log(greeting + ‘, nice meeting you.’)<br>}</p>
-<p>function say2 (greeting) {<br>  console.log(greeting + ‘, nice meeting you, too’)<br><code></code></p>
-<p>###答案<br><code></code>js<br>class People {<br>            constructor (name) {<br>                this.name = name<br>                this.events = {}<br>            }<br>            sayHi () {<br>                console.log(‘Hi, I am ‘ + this.name)<br>            }</p>
-<pre><code>    on (event, cbk) {
-        // 利用数组储存同事件的所有回调
-        (this.events[event] || (this.events[event] = [])).push(cbk)
-    }
-
-    off (event, cbk) {
-        let eventArr = this.events[event]
-        // 反向遍历,不至于删除数据之后,数组长度影响遍历
-        for(let i=eventArr.length-1; i&gt;=0; i--){
-            if(cbk === eventArr[i]){
-                eventArr.splice(i,1)
-            }
-        }
-    }
-
-    emit (event, param){
-        let eventArr = this.events[event]
-        // 遍历同事件的所有回调,执行
-        eventArr.forEach(function(cbk){
-            cbk(param)
-        })
-    }
-}
-
-
-var jerry = new People(&apos;Jerry&apos;)
-jerry.sayHi()
-
-jerry.on(&apos;greeting&apos;, say)
-jerry.on(&apos;greeting&apos;, say2)
-jerry.emit(&apos;greeting&apos;, &apos;Hi&apos;)
-jerry.off(&apos;greeting&apos;, say)
-jerry.emit(&apos;greeting&apos;, &apos;Hi&apos;)
-
-function say (greeting) {
-  console.log(greeting + &apos;, nice meeting you.&apos;)
-}
-function say2 (greeting) {
-  console.log(greeting + &apos;, nice meeting you, too&apos;)
-}
-</code></pre><p><code></code></p>
+        <p>##找出下面代码的规律并且编写一个函数，转换特定的整数到对应的字符串。<br>1 =&gt; A，2 =&gt; B，3 =&gt; C，…，26 =&gt; Z，27 =&gt; AA，28 =&gt; AB，29 =&gt; AC，…，52 =&gt; AZ，53 =&gt; BA，…</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">convert</span> (<span class="params">num</span>) </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>###答案</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">convert</span>(<span class="params">n</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> s = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">while</span> (n&gt;<span class="number">0</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> m = n % <span class="number">26</span>;</span><br><span class="line">        <span class="keyword">if</span> (m==<span class="number">0</span>) m = <span class="number">26</span>;</span><br><span class="line">        s = <span class="built_in">String</span>.fromCharCode(m + <span class="number">64</span>) + s;</span><br><span class="line">        n = (n - m) / <span class="number">26</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> s;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>##题目1：编写一个 People 类，使其的实例具有监听事件、触发事件、解除绑定功能。（实例可能监听多个不同的事件，也可以去除监听事件）<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">People.prototype.sayHi = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'Hi, I am '</span> + <span class="keyword">this</span>.name)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 目标效果：</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> jerry = <span class="keyword">new</span> People(<span class="string">'Jerry'</span>)</span><br><span class="line">jerry.sayHi() <span class="comment">// =&gt; 输出：'Hi, I am Jerry'</span></span><br><span class="line"></span><br><span class="line">jerry.on(<span class="string">'greeting'</span>, say)</span><br><span class="line">jerry.on(<span class="string">'greeting'</span>, say2)</span><br><span class="line">jerry.emit(<span class="string">'greeting'</span>, <span class="string">'Hi'</span>) <span class="comment">// =&gt; 输出：'Hi, nice meeting you.' 和 'Hi, nice meeting you, too'</span></span><br><span class="line">jerry.off(<span class="string">'greeting'</span>, say)</span><br><span class="line">jerry.emit(<span class="string">'greeting'</span>, <span class="string">'Hi'</span>) <span class="comment">// =&gt; 只输出：'Hi, nice meeting you, too'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">say</span> (<span class="params">greeting</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(greeting + <span class="string">', nice meeting you.'</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">say2</span> (<span class="params">greeting</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(greeting + <span class="string">', nice meeting you, too'</span>)</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>###答案<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">People</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span> (name) &#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name</span><br><span class="line">        <span class="keyword">this</span>.events = &#123;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">    sayHi () &#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'Hi, I am '</span> + <span class="keyword">this</span>.name)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    on (event, cbk) &#123;</span><br><span class="line">        <span class="comment">// 利用数组储存同事件的所有回调</span></span><br><span class="line">        (<span class="keyword">this</span>.events[event] || (<span class="keyword">this</span>.events[event] = [])).push(cbk)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    off (event, cbk) &#123;</span><br><span class="line">        <span class="keyword">let</span> eventArr = <span class="keyword">this</span>.events[event]</span><br><span class="line">        <span class="comment">// 反向遍历,不至于删除数据之后,数组长度影响遍历</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i=eventArr.length<span class="number">-1</span>; i&gt;=<span class="number">0</span>; i--)&#123;</span><br><span class="line">            <span class="keyword">if</span>(cbk === eventArr[i])&#123;</span><br><span class="line">                eventArr.splice(i,<span class="number">1</span>)</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    emit (event, param)&#123;</span><br><span class="line">        <span class="keyword">let</span> eventArr = <span class="keyword">this</span>.events[event]</span><br><span class="line">        <span class="comment">// 遍历同事件的所有回调,执行</span></span><br><span class="line">        eventArr.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">cbk</span>)</span>&#123;</span><br><span class="line">            cbk(param)</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> jerry = <span class="keyword">new</span> People(<span class="string">'Jerry'</span>)</span><br><span class="line">jerry.sayHi()</span><br><span class="line"></span><br><span class="line">jerry.on(<span class="string">'greeting'</span>, say)</span><br><span class="line">jerry.on(<span class="string">'greeting'</span>, say2)</span><br><span class="line">jerry.emit(<span class="string">'greeting'</span>, <span class="string">'Hi'</span>)</span><br><span class="line">jerry.off(<span class="string">'greeting'</span>, say)</span><br><span class="line">jerry.emit(<span class="string">'greeting'</span>, <span class="string">'Hi'</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">say</span> (<span class="params">greeting</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(greeting + <span class="string">', nice meeting you.'</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">say2</span> (<span class="params">greeting</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(greeting + <span class="string">', nice meeting you, too'</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
